@@ -121,7 +121,9 @@ contract TruElect {
 
     /**@notice authorized voters (category=>user roles= true/false) */
     mapping(string => mapping(string=>bool)) private authorizedVoter;
-  
+    
+    /** @notice user profile map */ 
+    mapping(address=>string) private userProfile;
 
     /// ------------------------------------- MODIFIER ------------------------------------------- ///
     /** @notice modifier to check that only the registered voters can call a function */
@@ -218,8 +220,29 @@ contract TruElect {
     /** @notice emit event when agreement to remove committee head has been reached */
     event removeCH(address electionCommittee,bool consent);
 
+     /** @notice emit event when registered*/ 
+    event ProfileRegisteredEvent(address addr, string cid);
+    
     
     /// --------------------------------------- FUNCTIONS ------------------------------------------- ///
+       /** @dev register user profile */
+    function registerUserProfile(string memory cid) public returns (bool) {
+
+        /** @dev check if user is already registered*/ 
+        require(encodeStrings(userProfile[msg.sender] , ""),"User is already registered" );
+        /** @dev Register user */ 
+        userProfile[msg.sender] = cid;
+        /** @dev Emit Registration Event*/
+        emit ProfileRegisteredEvent(msg.sender, cid);
+        return true;
+    }
+
+    /** @dev Read User profile*/
+    function getUserProfile () public view returns (string memory){
+        return userProfile[msg.sender];
+    } 
+
+
     /** @dev helper function to compare strings */
     function encodeStrings(string memory _str, string memory str) private pure returns (bool) {
         return keccak256(abi.encodePacked(_str)) == keccak256(abi.encodePacked(str));
