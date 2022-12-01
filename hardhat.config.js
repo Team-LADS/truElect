@@ -12,7 +12,9 @@ const fs = require("fs");
 const chalk = require("chalk");
 const { isAddress, getAddress, formatUnits, parseUnits } = utils;
 const dotenv = require("dotenv");
-const defaultNetwork = "mumbai";
+// const defaultNetwork = "mumbai";
+const defaultNetwork = "hardhat";
+
 
 dotenv.config();
 
@@ -31,17 +33,9 @@ function mnemonic() {
 } 
 module.exports = {
   defaultNetwork,
-  gasReporter: {
-    currency: "USD",
-    coinmarketcap: process.env.COINMARKETCAP || null,
-  },
   networks: {
     localhost: {
-      url: "http://localhost:7545",
-    },
-    rinkeby: {
-      url: process.env.RINKEBY_ALCHEMY_API_URL,
-      accounts: [process.env.METAMASK_KEY],
+      url: "http://127.0.0.1:8545",
     },
     mumbai: {
       url: process.env.POLYGON_ALCHEMY_API_URL,
@@ -79,11 +73,6 @@ module.exports = {
       default: 0, // here this will by default take the first account as deployer
     },
   },
-  etherscan: {
-    apiKey: {
-    rinkeby: process.env.ETHERSCAN_KEY,
-  }
-},
   plugins:["solidity-coverage"]
 };
 const DEBUG = false;
