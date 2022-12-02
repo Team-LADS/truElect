@@ -26,38 +26,38 @@ const truElectContractToken = () => {
  
 const notify = (str) => toast(str);
 
-const register = async(cid) =>{
-  const contract = truElectContract();
-  notify("Registering....");
+// const register = async(cid) =>{
+//   const contract = truElectContract();
+//   notify("Registering....");
 
-  try {
-    const result =await contract.registerUserProfile(cid, {gasLimit:300000});
-    notify("Registered successfully");
-   return result
-   }
-  catch(error){
-   notify("error, check console");
-    console.log(error)
+//   try {
+//     const result =await contract.registerUserProfile(cid, {gasLimit:300000});
+//     notify("Registered successfully");
+//    return result
+//    }
+//   catch(error){
+//    notify("error, check console");
+//     console.log(error)
   
-  }
+//   }
 
-}
+// }
 
-const getUserProfile = async() =>{
-  const contract = truElectContract();
-  notify("Fetching User....");
+// const getUserProfile = async() =>{
+//   const contract = truElectContract();
+//   notify("Fetching User....");
 
-  try {
-    const result =await contract.getUserProfile(cid, {gasLimit:300000});
-    notify("User Fetched successfully");
-   return result
-   }
-  catch(error){
-    notify("error, check console");
-    console.log(error)
+//   try {
+//     const result =await contract.getUserProfile(cid, {gasLimit:300000});
+//     notify("User Fetched successfully");
+//    return result
+//    }
+//   catch(error){
+//     notify("error, check console");
+//     console.log(error)
   
-  }
-} 
+//   }
+// } 
 
 const uploadVoter = async(_role,votingWeight,Arr) => {
   const contract = truElectContract();
@@ -383,9 +383,6 @@ export const ConnectProvider = ({ children }) =>{
        if (chainId ==137) {setnetworkConnected("Polygon")}
        if (chainId ==80001) {setnetworkConnected("Mumbai")}
       
-      
-      
-   
       };
     
     
