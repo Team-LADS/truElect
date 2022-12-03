@@ -121,10 +121,10 @@ contract TruElect {
     mapping(address => bool) private hasApproved;
 
     /**@notice authorized voters (category=>user roles= true/false) */
-    mapping(string => mapping(string=>bool)) private authorizedVoter;
+    mapping(string => mapping(string => bool)) private authorizedVoter;
     
     /** @notice user profile map */ 
-    mapping(address=>string) private userProfile;
+    mapping(address => string) private userProfile;
 
     /// ------------------------------------- MODIFIER ------------------------------------------- ///
     /** @notice modifier to check that only the registered voters can call a function */
@@ -495,8 +495,9 @@ contract TruElect {
 
         /** @notice check that balance of voter is greater than zero.. 1 token per votes */
         require(
-            tetToken.balanceOf(msg.sender) > 1*1e18,
-            "YouR balance is currently not sufficient to vote. Not a voter"
+            tetToken.balanceOf(msg.sender) >= 1 * 1e18,
+            // tetToken.balanceOf(msg.sender) > 0,
+            "Your balance is currently not sufficient to vote. Not a voter"
             );
       
         /** @notice check that a candidate is valid for a vote in a category*/
@@ -546,7 +547,7 @@ contract TruElect {
     * @dev only election committee head and members of the election committee can compile votes
     * @dev function cannot be called if contract is paused
     */
-    function collateVotes(string memory _position) onlyElectors onlyWhenNotPaused public  returns (uint total, uint winnigVotes, Candidate[] memory){
+    function collateVotes(string memory _position) onlyElectors onlyWhenNotPaused public  returns (uint total, uint winningVotes, Candidate[] memory){
         
         /** @notice require that the category voting session is over before compiling votes */
         require(
@@ -566,7 +567,7 @@ contract TruElect {
                     
                     winningVoteCount = candidates[i + 1].voteCount;
                     uint currentId = candidates[i + 1].id;
-                    winnerId= currentId;
+                    winnerId = currentId;
                     
                     /** @dev winningCandidateIndex = i; */
                     Candidate storage currentItem = candidates[currentId];
@@ -581,6 +582,7 @@ contract TruElect {
         activeElections[_position].votesCollated=true;
         uint addressEntityIndex = currentElectionIndex[_position];
         activeElectionArrays[addressEntityIndex].votesCollated =true;
+        
         /** @notice update winner for the category */
         winnerOfCategory[_position]=candidates[winnerId];
 
