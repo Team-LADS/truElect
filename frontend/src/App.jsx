@@ -7,10 +7,12 @@ import {
 import Theme from './theme/Theme';
 import { useThemeContext } from './context/theme-context';
 import Profile from './sections/profile/Profile';
-import Home from './sections/home/Home';
+// import Home from './sections/home/Home';
 import Register from './sections/register/Register';
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Landing";
 
-import { toast, ToastContainer } from 'react-toastify';
+import {ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 import { useContractContext } from './context/contractContext/contractContext';
@@ -39,11 +41,12 @@ getBal();
           <Route exact path='/' element={<Home/>}/>
           <Route exact path='/profile' element={<Profile/>}/>
           <Route exact path='/register' element={<Register/>}/>
+          <Route path="/dashboard" element={ <Dashboard /> } /> 
         </Routes>
       </BrowserRouter>
       <ToastContainer/>
     </main>
   )
-}
+} 
 
-export default App
+export default App;

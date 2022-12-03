@@ -113,7 +113,7 @@ $ npm install
 
 $ npm i --save-dev "@nomiclabs/hardhat-waffle" "ethereum-waffle" "chai" "@nomiclabs/hardhat-ethers" "ethers" "web3" "@nomiclabs/hardhat-web3" "@nomiclabs/hardhat-etherscan" "@openzeppelin/contracts" 
 
-$ npm i --save-dev "dotenv" "@tenderly/hardhat-tenderly" "hardhat-gas-reporter" "hardhat-deploy" "ganache" "ganache-cli" "solidity-coverage"
+$ npm i --save-dev "dotenv" "@tenderly/hardhat-tenderly" "hardhat-gas-reporter" "hardhat-deploy" "ganache" "ganache-cli" "solidity-coverage" "apexcharts" "react-apexcharts" "react-router-dom"
 ```
 > ### Env Setup
  Next create a `.env` file by using the sample.env. Retrieve your information from the relevant sites and input the information where needed in the `.env` file.
@@ -195,11 +195,23 @@ $ npx hardhat verify 0xD6c7Bc7089DBe4DC6D493E35eaC3dAf5b18FC04d 0xC291B856723080
 
 ```shell
 # cd frontend
+# install tailwind, postcss and autoprefixer
+
+$ npm i -D tailwindcss postcss autoprefixer @iconify/react
+
+$ npx tailwindcss init -p
 
 $ npm install
 
-$ npm run dev
+# start the server
+$ npm start
 ```
+<!-- # $ npm run dev -->
+Open a separate terminal
+```
+$ npm run tailwind
+```
+
 <!-- > ### Steps to host the live site on Vercel
 - Create an account on [vercel](https://vercel.com/) and authorize your [GitHub](https://github.com/Polygon-Team-LADS) account.
 

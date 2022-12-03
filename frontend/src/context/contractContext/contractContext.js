@@ -81,7 +81,7 @@ const register = async(cid) =>{
    notifyError("error,"+ error.message);
     console.log(error)
   
-  }
+ }
 
 }
 
@@ -98,7 +98,7 @@ const getUserProfile = async() =>{
    notifyError("error,"+ error.message);
     console.log(error)
   
-  }
+   }
 } 
 
 const uploadVoter = async(_role,votingWeight,Arr) => {
@@ -443,9 +443,6 @@ export const ConnectProvider = ({ children }) =>{
        if (chainId ===80001) {setnetworkConnected("Mumbai")}
        if (chainId ===31337) {setnetworkConnected("hardhat")}
       
-      
-      
-   
       };
     
     

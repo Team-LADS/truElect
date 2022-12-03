@@ -39,7 +39,7 @@ const Header = () => {
           </Pack>
           <Pack className="election__counts-pack">
             <h1 data-aos="zoom-in-down">2</h1>
-            <p data-aos="fade-up">Elections On Going</p>
+            <p data-aos="fade-up">Elections OnGoing</p>
           </Pack>
           <Pack className="election__counts-pack">
             <h1 data-aos="zoom-in-left">12</h1>
