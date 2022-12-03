@@ -40,6 +40,8 @@ nav{
     color:white;
     font-size: 2rem;
     cursor: pointer;
+    max-width: 40px;
+    border: 0;
 }
 .nav__icon,.nav__close{
     font-size: 1.5rem;
@@ -74,6 +76,11 @@ nav{
 .light__green{
     background: green;
 }
+
+/* .nav__menu li:nth-child(5),
+   .nav__menu li:nth-child(6){
+    margin-inline:.2rem ;
+   } */
 /* theme settings for color */
 .bg-2.color-1 .nav__container .nav__menu li a,
 .bg-2.color-3 .nav__container .nav__menu li a,
@@ -105,9 +112,20 @@ nav{
     animation: nav__animation 500ms ease-in forwards;
     transition: var(--transition);
    }
+   .connect-sm li{
+    background: red;
+    width: 100%;
+   }
    .nav__menu-sm li,.connect li{
     padding: 1rem 2rem;
    }
+
+   .nav__menu-sm li:nth-child(5),
+   .nav__menu-sm li:nth-child(6){
+    padding: 1rem .6rem;
+    margin-inline:.4rem ;
+   }
+
    #theme__icon{
     margin-left: auto;
     margin-right: 2rem;
@@ -122,12 +140,14 @@ nav{
    .connect{
     gap:.3rem;
     font-size: .8rem;
-    top:450%;
+    /* top:450%; */
    }
    .nav__menu-sm.hide{
     animation: nav__animation-hide 500ms ease-in forwards;
     transition: var(--transition);
    }
+
+   
    
    @keyframes nav__animation {
     from{

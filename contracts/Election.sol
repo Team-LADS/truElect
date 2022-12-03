@@ -18,6 +18,7 @@ pragma solidity ^0.8.10;
     function balanceOf(address contractOwner) external view returns (uint256);
  }
 
+
 contract TruElect {
 
     constructor(address _tokenAddress) {

@@ -37,6 +37,9 @@ module.exports = {
     localhost: {
       url: "http://127.0.0.1:8545",
     },
+    localhost: {
+      url: "http://127.0.0.1:8545",
+    },
     mumbai: {
       url: process.env.POLYGON_ALCHEMY_API_URL,
       accounts: [process.env.METAMASK_KEY],
