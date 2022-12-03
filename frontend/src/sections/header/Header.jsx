@@ -4,6 +4,7 @@ import AOS from 'aos'
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import Pack from '../../components/Pack';
+import { ToastContainer } from 'react-toastify';
 const Header = () => {
   useEffect(() => {
     AOS.init({
@@ -12,6 +13,8 @@ const Header = () => {
       // ease: 'easeInOutQuad',
     });
   }, []);
+
+
   return (
     <header id='header'>
       <div className="container header__container">

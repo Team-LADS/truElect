@@ -1,9 +1,53 @@
 import { useEffect,createContext ,useContext,useState} from "react";
 import axios from "axios";
-import { Web3Storage, getFilesFromPath } from 'web3.storage'
-
+import { Web3Storage} from 'web3.storage'
+import { toast } from "react-toastify";
 
 const STORAGE_TOKEN = process.env.REACT_APP_WEB3_STORAGE_TOKEN;
+
+const notifyError = (str) => toast.error(str, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });;
+
+const notifyWarning = (str)=> toast.warn(str, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
+
+const notifySuccess = (str)=> toast.success(str, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
+const notifyInfo = (str)=>    toast.info(str, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+
 
 export const StorageContext = createContext();
 
@@ -19,73 +63,95 @@ const createJsonFile= (userData)=> {
 
 export const StorageProvider = ({ children }) => {
     const [userProfile,setUserProfile] = useState();
+    const [isVerified,setIsVerified] = useState();
 
     // get user profile and update user profile state
-    const GetUserProfile = (cid)=>{
-        console.log("https://dweb.link/ipfs/"+cid);
-
-        useEffect(()=>{
-            axios.get('https://dweb.link/ipfs/'+cid).then(result=>{
-                console.log(result)
-                return result
-                // setUserProfile(result);
-            }).catch(error=>console.log(error))
-        },[])
-    }
-
-    const UploadUserProfile =(info)=>{
-        console.log("show state")
-        useEffect(()=>{
-            // const info = {
-            //     fullname:	"Prince",
-            //     age	:10,
-            //     gender:	"male",
-            //     email	:"prince@example.com",
-            //     address:	{
-            //     street:	"Prince Street",
-            //     city:	"county zero",
-            //     state:	"shanzy",
-            //     zip	:"12345"
-            //     },
-            //     vin	:"123457902984578w39488wueyuw",
-            //     isregistered:	true,
-            //     profileimage:	"owhfojwew-jd0aahoajfbov",
-            //     walletAddress:'0x003ufl84702fykwudksllyeu'
-            // }
+    const getUserProfileStorage = async(currentAccount)=>{
             try {
-                const file = createJsonFile(info)
+                notifyInfo("Fetching user profile...")
+                //get user from db
+                const res = await axios.post(process.env.REACT_APP_SERVER_PROFILE,{walletAddress:currentAccount});
+                const result = res.data;
+                //get user profile web3storage and update user profile state
+                const user = await axios.get(result.payload.cidLink);
+                if(user) notifySuccess("User profile updated successfully")
+                setUserProfile(user.data);
+                setIsVerified(res.data.isVerified)
+                return result
+            } catch (error) {
+                console.log(error)
+                notifyError(error.message + ": " + error.response.data.message)
+                return error.response
+            }
+    }
+//     const info ={
+//             fullName:	"Prince",
+//             age	:10,
+//             gender:	"male",
+//             email	:"prince@example.com",
+//             address:	"Prince Street",
+//             city:	"county zero",
+//             state:	"shanzy",
+//             zip	:"12345",
+//             vin	:"123457902984578w39488wueyuw",
+//             isRegistered:	true,
+//             profileImage:	process.env.REACT_APP_MOCKIMAGEDATA,
+//             walletAddress:'0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199'
+// }
+    const uploadUserProfile =async(info)=>{
+            try {
+                //check if the user is already registered
+                const isAlreadyRegistered = await getUserProfileStorage(info.walletAddress); 
+
+                if(isAlreadyRegistered.status === 200) return notifyError(`${info.walletAddress} is already registered}`);
+                if(isAlreadyRegistered.status === 500) return notifyError("Server error");
+                if(isAlreadyRegistered.status === 404){
+                    const file = createJsonFile(info)
                
-                if (!STORAGE_TOKEN ) {
-                    return console.error('A token is needed. You can create one on https://web3.storage')
-                }
-           
-                const web3storage = async ()=>{
-                    const storage = new Web3Storage({ token:STORAGE_TOKEN })
-        
-                    const files = [file]
-                    console.log(`Uploading ${files.length} files`)
-                    const cid = await storage.put(file,{
-                        name:info.walletAddress,
-                        maxRetries:3
-                    })
-                    console.log('Content added with CID:', cid)
-                    console.log(`https://${cid}.ipfs.dweb.link/${info.walletAddress}`)
-                }
-                
-                web3storage()
+                    if (!STORAGE_TOKEN ) {
+                        return console.error('A token is needed. You can create one on https://web3.storage')
+                    }
+               
+                    const web3storage = async ()=>{
+                        const storage = new Web3Storage({ token:STORAGE_TOKEN })
+            
+                        const files = [file]
+                        console.log(`Uploading ${files.length} files`)
+                        notifyInfo(`Uploading ${files.length} files`)
+                        const cid = await storage.put(file,{
+                            name:info.walletAddress,
+                            maxRetries:3
+                        })
+                        const cidLink = `https://${cid}.ipfs.w3s.link/${info.walletAddress}`
+                        console.log('Content added with CID:', cid)
+                        notifySuccess('Content added with CID: '+ cid)
+                        console.log(cidLink)
+                        //create a user in the backend 
+                        const res =await axios.post(process.env.REACT_APP_SERVER_REGISTER,{walletAddress:info.walletAddress,cid:cid,cidLink:cidLink});
+                        if(res.statusCode === 200) notifySuccess(res.data.message);
+                    }
+                    
+                    web3storage()
+                } 
                 
             } catch (error) {
+                console.log("err",error)
                 return console.error(error)
             }
-        },[])
  
     };
+   
 
     return <StorageContext.Provider value={
         {
             userProfile,
-            GetUserProfile,
-            UploadUserProfile
+            isVerified,
+            getUserProfileStorage,
+            uploadUserProfile,
+            notifyError,
+            notifyInfo,
+            notifySuccess,
+            notifyWarning
         }
     }>{children}</StorageContext.Provider>
 }
