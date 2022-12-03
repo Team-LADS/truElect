@@ -56,7 +56,7 @@ const truElectContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
   const truElectContract = new ethers.Contract(truElectContractAddress, truElectContractABI, signer);
- 
+  console.log("ere",truElectContract().getUserProfile())
   return truElectContract;
 };
 const truElectContractToken = () => {
@@ -100,6 +100,8 @@ const getUserProfile = async() =>{
   
    }
 } 
+
+
 
 const uploadVoter = async(_role,votingWeight,Arr) => {
   const contract = truElectContract();
@@ -375,7 +377,7 @@ const getResult = async(_category) => {
 }
 const check = async(role, addr) => {
   const contract = truElectContract();
-  console.log('got here',role)
+  console.log('got here',role,contract)
  try {
   notifyInfo('Checking voter role')
    const result =await contract.checkVoterRole(role, addr);

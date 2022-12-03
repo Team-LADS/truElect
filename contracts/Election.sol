@@ -1,6 +1,6 @@
 //SPDX-License-Identifier:MIT
 pragma solidity ^0.8.10;
-
+import "hardhat/console.sol";
 /**
 * @author Team-SALD - Polygon Internship 22
 * @title An Election Dapp
@@ -255,6 +255,7 @@ contract TruElect {
     */
     function checkVoterRole(string memory _role,address _address) onlyWhenNotPaused public view 
         returns (bool) {
+            console.log("coming from smartcontract",_address,_role);
         return encodeStrings( _role,voters[_address].role);
     }     
     

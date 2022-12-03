@@ -13,16 +13,15 @@ import { useStorageContext } from '../../context/storageContext';
 import { useEffect } from 'react';
 
 const Navbar = () => {
-<<<<<<< HEAD
   const {showModalHandler} = useModalContext();
   const [showLinks,setShowLinks] = useState(false)
   const [connect,setConnect] = useState('');
   const [navSm,setNavSm] = useState('');
   const {connectWallet,currentAccount} = useContractContext();
-  const {userProfile,getUserProfile} = useStorageContext();
+  const {userProfile,getUserProfileStorage} = useStorageContext();
 
   const getInfo = useCallback(()=>{
-    getUserProfile(currentAccount)
+    getUserProfileStorage(currentAccount)
   },[currentAccount])
  console.log(typeof userProfile)
   useEffect(()=> {
@@ -30,13 +29,6 @@ const Navbar = () => {
     
     getInfo();
   },[currentAccount])
-=======
-  const { showModalHandler } = useModalContext();
-  const [showLinks, setShowLinks] = useState(false)
-  const [connect, setConnect] = useState('');
-  const [navSm, setNavSm] = useState('');
-  const { connectWallet, currentAccount } = useContractContext();
->>>>>>> 5a5fd109c7bd5fdde3c2e7da2d3f78404fb1f3ed
 
   const showLinksHandler = () => {
     setShowLinks(true);
@@ -55,7 +47,6 @@ const Navbar = () => {
 
         <ul className={`nav__menu ${navSm}`}>
           {
-<<<<<<< HEAD
             data.map(item=>(<li key={item.id}><a href={item.link} >{item.title}</a></li>))
             
           }
@@ -103,46 +94,6 @@ const Navbar = () => {
     </div>
       }
      
-=======
-            data.map(item => <li key={item.id}><a href={item.link} >{item.title}</a></li>)
-          }
-        </ul>
-
-        <ul className={`connect ${connect}`}>
-          {
-
-            !currentAccount && <li ><a className=" btn sm" href="#" onClick={() => { connectWallet() }}>Connect Wallet</a></li>
-          }
-          {
-            !currentAccount && <li ><a className=" btn sm" href="#">Register</a></li>
-
-          }
-
-        </ul>
-        <ul className='walcon'>
-          {!currentAccount && <li className="light__red"></li>
-          }{
-            currentAccount && <li className="light__green"></li>
-          }
-          {
-            currentAccount && <li className="connected "><a className="connected btn sm" href='#'>{currentAccount}</a></li>
-          }
-        </ul>
-
-        <button id='theme__icon' onClick={() => showModalHandler()}><IoIosColorPalette /></button>
-        {
-          !showLinks && <div className="nav__icon" onClick={() => showLinksHandler()}>
-            <GiHamburgerMenu />
-          </div>
-        }
-
-        {
-          showLinks && <div className="nav__close" onClick={() => hideLinksHandler()}>
-            <ImCross />
-          </div>
-        }
-
->>>>>>> 5a5fd109c7bd5fdde3c2e7da2d3f78404fb1f3ed
       </div>
     </nav>
   )

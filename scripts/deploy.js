@@ -8,6 +8,10 @@ const tokenContractName = "TruElectToken";
 const electionContractName = "TruElect";
 const userContractName = 'User';
 
+let tokenContractAddress;
+let electionContractAddress;
+let userContractAddress;
+
 async function main(){
      /*
   A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts,
@@ -55,6 +59,11 @@ async function main(){
     `\n 🏵 ${userContractName} Contract Address:`,
     deployedUserContract.address
   );
+
+  //set address for all contract addresses
+  tokenContractAddress=deployedTruElectTokenContract.address;
+  electionContractAddress=deployedTruElectVotingContract.address;
+  userContractAddress=deployedUserContract.address;
 }
 
 // Call the main function and catch if there is any error
@@ -67,26 +76,26 @@ main()
 
     
     //get the paths to files for election contract
-    const electionContractFilePath = fsPath.join(__dirname, '../artifacts/contracts/Election.sol/Election.json');
+    const electionContractFilePath = fsPath.join(__dirname, '../artifacts/contracts/Election.sol/TruElect.json');
     const readElectionContractAbifile = fs.readFileSync(electionContractFilePath, 'utf8');
 
     //get the paths to files for token contract
-    const tokenContractFilePath = fsPath.join(__dirname, '../artifacts/contracts/TruElecToken.sol/TruElecToken.json');
+    const tokenContractFilePath = fsPath.join(__dirname, '../artifacts/contracts/TruElect.sol/TruElectToken.json');
     const readTokenContractAbifile = fs.readFileSync(tokenContractFilePath, 'utf8');
 
 
     //capture user contract address and abi
     const captureUserAbi = JSON.parse(readUSerContractAbifile).abi
-    const captureUserContractAddress = deployedUserContract.address;
+    const captureUserContractAddress = userContractAddress;
 
 
     //capture election contract address and abi
     const captureElectionAbi = JSON.parse(readElectionContractAbifile).abi
-    const captureElectionContractAddress = deployedTruElectVotingContract.address;
+    const captureElectionContractAddress = electionContractAddress;
 
     //capture token contract address and abi
     const captureTokenAbi = JSON.parse(readTokenContractAbifile).abi
-    const captureTokenContractAddress = deployedTruElectTokenContract.address;
+    const captureTokenContractAddress = tokenContractAddress;
 
     
 

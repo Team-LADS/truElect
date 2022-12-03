@@ -22,16 +22,16 @@ const App = () => {
 const {themeState} = useThemeContext()
 
 
-const {check,currentAccount} = useContractContext();
+const {check,getUserProfile,currentAccount} = useContractContext();
 
 
-const getBal = async()=>{
-  const resTx = await check('electionCommHead',`0xdD2FD4581271e230360230F9337D5c0430Bf44C0`);
-  const res = await resTx.wait();
-  console.log('this sis res',res, currentAccount);
-}
+// const getBal = async()=>{
+//   const resTx = await getUserProfile();
+//   const res = await resTx.wait();
+//   console.log('this sis res',res, currentAccount);
+// }
 
-getBal();
+// getBal();
   
   return (
     <main className={`${themeState.primary} ${themeState.background}`} >

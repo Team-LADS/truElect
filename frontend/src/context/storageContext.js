@@ -66,7 +66,7 @@ export const StorageProvider = ({ children }) => {
     const [isVerified,setIsVerified] = useState();
 
     // get user profile and update user profile state
-    const getUserProfile = async(currentAccount)=>{
+    const getUserProfileStorage = async(currentAccount)=>{
             try {
                 notifyInfo("Fetching user profile...")
                 //get user from db
@@ -101,7 +101,7 @@ export const StorageProvider = ({ children }) => {
     const uploadUserProfile =async(info)=>{
             try {
                 //check if the user is already registered
-                const isAlreadyRegistered = await getUserProfile(info.walletAddress); 
+                const isAlreadyRegistered = await getUserProfileStorage(info.walletAddress); 
 
                 if(isAlreadyRegistered.status === 200) return notifyError(`${info.walletAddress} is already registered}`);
                 if(isAlreadyRegistered.status === 500) return notifyError("Server error");
@@ -146,7 +146,7 @@ export const StorageProvider = ({ children }) => {
         {
             userProfile,
             isVerified,
-            getUserProfile,
+            getUserProfileStorage,
             uploadUserProfile,
             notifyError,
             notifyInfo,
