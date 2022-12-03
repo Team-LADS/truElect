@@ -7,7 +7,17 @@ const VotersBox = () => {
     
     let votersList = voters.map((item) => {
         return (
-            <p className="font-normal text-sm my-[2px] py-1 pl-3 bg-violet-600 rounded text-gray-300" key={"p" + item[0]}>
+            <p className="font-normal text-sm my-[2px] py-1 pl-3 bg-violet-600 rounded text-gray-300" key={"p" + item[0]}
+            
+            style={{
+                marginTop:"5%",
+                width:"95%",
+                marginLeft:"2.5%",
+                padding:"5%",
+                borderRadius:"10px",
+                textAlign:"center"
+            }}
+            >
                 {item[1]}
             </p>
         )
