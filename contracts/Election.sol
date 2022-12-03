@@ -283,7 +283,7 @@ contract TruElect {
     function changeElectionCommHead(address _voter) onlyElectionCommittee onlyWhenNotPaused public{
         require(
             voters[_voter].isRegistered == true,
-            "Can't assign a role of election committee head to a non voter."
+            "Only the election committee have access"
             );
         uint256 voteToRemoveCHCheckpoint = 80 * electionCommitteeCount;
         require(
