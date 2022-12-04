@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2b0e9ef0.css",
+    "main.js": "/static/js/main.b8494f83.js",
+    "static/media/logo.png": "/static/media/logo.9bd2fbd4246ba0965734.png",
+    "static/media/truelect.png": "/static/media/truelect.bae6a46b7ee812de6b0c.png",
+    "index.html": "/index.html",
+    "main.2b0e9ef0.css.map": "/static/css/main.2b0e9ef0.css.map",
+    "main.b8494f83.js.map": "/static/js/main.b8494f83.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2b0e9ef0.css",
+    "static/js/main.b8494f83.js"
+  ]
+}

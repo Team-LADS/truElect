@@ -981,4 +981,4 @@ export const truElectContractABI =[
   }
 ]
 
-export const truElectContractAddress = "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853"
+export const truElectContractAddress = "0x427Db0A29d81C123228083418B99D2a69462D054"
