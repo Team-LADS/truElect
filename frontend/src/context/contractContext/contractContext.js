@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { truElectContractABI, truElectContractAddress } from "../../utils/constants";
 import { truElectTokenABI, truElectTokenAddress } from "../../utils/tokenConstants";
-
+import Web3 from "web3";
 export const ConnectContext = createContext();
 
 const { ethereum } = window;
@@ -377,17 +377,36 @@ const getResult = async(_category) => {
  }
 }
 const GetListOfCategory = async(_category) => {
-  
-  const provider = new ethers.providers.Web3Provider(ethereum);
-  // const signer = provider;
-  const contract = new ethers.Contract(truElectContractAddress, truElectContractABI, provider);
+  // const loadWeb3 = async () => {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    } else if (window.web3) {
+      window.web3 = new Web3(window.web3);
+    } else {
+      alert("blockchain browser not found .please install metamask");
+    }
+    let web3 = window.web3;
+    const accounts = await web3.eth.getAccounts();
+    // const networkId = await web3.eth.net.getId();
+    // const daiToken = DaiTokenAbi.networks[networkId];
+  let test =   new web3.eth.Contract(
+    truElectContractABI,
+    truElectContractAddress
+    );
+  return await test.methods.getListOfCategory().call()
+    // console.log(test);
+  // };
+  // const provider = new ethers.providers.Web3Provider(ethereum);
+  // // const signer = provider;
+  // const contract = new ethers.Contract(truElectContractAddress, truElectContractABI, provider);
   // console.log("ere",truElectContract.getUserProfile())
   // return truElectContract;
 
  try {
   //  const contract = truElectContract();
-console.log({contract})
-  return await contract.getListOfCategory()
+// console.log({contract})
+  // return await contract.getListOfCategory()
   
   }
  catch(error){
