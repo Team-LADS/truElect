@@ -13,7 +13,7 @@ const express = require('express');
 const { db } = require('./db/db');
 //require env file
 require('dotenv').config()
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 
 //require user routes
 const userRoutes = require('./routes/userRoute');
@@ -21,9 +21,7 @@ const userRoutes = require('./routes/userRoute');
 
 //require user
 const User = require('./model/userSchema')
-    //initalize db
-db();
-
+  
 
 //initailize app 
 const app = express();
@@ -39,4 +37,8 @@ app.use(express.json({limit: '50mb'}));
 app.use('/user', userRoutes);
 
 //listen to port 
-app.listen(PORT, () => console.log(`server is up on port ${PORT}`))
+app.listen(PORT, () => {
+  //initalize db
+  db()
+
+    console.log(`server is up on port ${PORT}`)})

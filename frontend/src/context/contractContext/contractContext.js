@@ -56,7 +56,7 @@ const truElectContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
   const truElectContract = new ethers.Contract(truElectContractAddress, truElectContractABI, signer);
-  console.log("ere",truElectContract().getUserProfile())
+  // console.log("ere",truElectContract.getUserProfile())
   return truElectContract;
 };
 const truElectContractToken = () => {
@@ -71,15 +71,16 @@ const truElectContractToken = () => {
 const register = async(cid) =>{
   const contract = truElectContract();
   notifyInfo("Registering....");
+  console.log("Registering....");
 
   try {
-    const result =await contract.registerUserProfile(cid, {gasLimit:300000});
+    const result =  await contract.registerUserProfile(cid, {gasLimit:300000});
+    
     notifySuccess("Registered successfully");
    return result
    }
   catch(error){
    notifyError("error,"+ error.message);
-    console.log(error)
   
  }
 
@@ -321,7 +322,7 @@ const candidateList = async() => {
   
  try {
   notifyInfo('Fetching Candidates list')
-   const result =await contract.getListOfCandidates();
+   const result = await contract.getListOfCandidates();
   notifySuccess('Candidates List successfully fetched')
   return result
   }
@@ -375,9 +376,30 @@ const getResult = async(_category) => {
   
  }
 }
+const GetListOfCategory = async(_category) => {
+  
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  // const signer = provider;
+  const contract = new ethers.Contract(truElectContractAddress, truElectContractABI, provider);
+  // console.log("ere",truElectContract.getUserProfile())
+  // return truElectContract;
+
+ try {
+  //  const contract = truElectContract();
+console.log({contract})
+  return await contract.getListOfCategory()
+  
+  }
+ catch(error){
+   console.log(error)
+   notifyError("error,"+ error.message);
+  
+ }
+}
+
 const check = async(role, addr) => {
   const contract = truElectContract();
-  console.log('got here',role,contract)
+  console.log({role, addr})
  try {
   notifyInfo('Checking voter role')
    const result =await contract.checkVoterRole(role, addr);
@@ -391,7 +413,7 @@ const check = async(role, addr) => {
   
  }
 }
-
+// check()
 const pauseContract = async(value) => {
   const contract = truElectContract();
   
@@ -503,7 +525,8 @@ export const ConnectProvider = ({ children }) =>{
           updateChairman,
           voteConsensus,
           register,
-          getUserProfile
+          getUserProfile,
+          GetListOfCategory
         }}
       >
         {children}

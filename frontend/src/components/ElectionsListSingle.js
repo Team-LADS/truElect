@@ -31,7 +31,6 @@ const ElectionsListSingle = ({props}) => {
                         series.map((el,ind,arr) => {
                             let h = Math.floor((el / Math.max(...arr)) * 100), 
                             style = {height: `${h}%`}
-                            console.log(style)
                             return <div className="w-[2px] bg-sky-400" style={style} key={"bar" + idx + ind}></div>
                         })
                     }

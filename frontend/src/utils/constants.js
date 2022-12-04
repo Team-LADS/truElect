@@ -461,7 +461,7 @@ export const truElectContractABI =[
       },
       {
         "internalType": "uint256",
-        "name": "winnigVotes",
+        "name": "winningVotes",
         "type": "uint256"
       },
       {
@@ -657,6 +657,19 @@ export const truElectContractABI =[
         "internalType": "struct TruElect.Candidate[]",
         "name": "",
         "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getListOfCategory",
+    "outputs": [
+      {
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
       }
     ],
     "stateMutability": "view",
@@ -967,4 +980,5 @@ export const truElectContractABI =[
     "type": "function"
   }
 ]
+
 export const truElectContractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"

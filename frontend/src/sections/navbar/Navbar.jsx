@@ -17,12 +17,19 @@ const Navbar = () => {
   const [showLinks,setShowLinks] = useState(false)
   const [connect,setConnect] = useState('');
   const [navSm,setNavSm] = useState('');
-  const {connectWallet,currentAccount} = useContractContext();
+  const {
+    connectWallet,
+    currentAccount, 
+    register,
+    getUserProfile
+  } = useContractContext();
   const {userProfile,getUserProfileStorage} = useStorageContext();
 
   const getInfo = useCallback(()=>{
     getUserProfileStorage(currentAccount)
   },[currentAccount])
+
+  // register("tgtg")
  console.log(typeof userProfile)
   useEffect(()=> {
     if(!currentAccount) return

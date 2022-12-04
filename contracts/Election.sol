@@ -380,6 +380,13 @@ contract TruElect {
         }
         return contestants;
     }
+   /**
+    * @notice function that return list of candidates
+    * @dev function cannot be called if contract is paused
+    */
+    function getListOfCategory() public view  returns (string[] memory) {
+        return electionCategories;
+    }
 
     /**
     * @notice setup election
@@ -495,9 +502,8 @@ contract TruElect {
 
         /** @notice check that balance of voter is greater than zero.. 1 token per votes */
         require(
-            tetToken.balanceOf(msg.sender) >= 1 * 1e18,
-            // tetToken.balanceOf(msg.sender) > 0,
-            "Your balance is currently not sufficient to vote. Not a voter"
+            tetToken.balanceOf(msg.sender) == 1*1e18,
+            "YouR balance is currently not sufficient to vote. Not a voter"
             );
       
         /** @notice check that a candidate is valid for a vote in a category*/

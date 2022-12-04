@@ -1,9 +1,9 @@
 import './register.css';
 import {BiError, BiHandicap} from 'react-icons/bi'
-import { useState } from 'react';
+import { useState , useHistory} from 'react';
 import { useStorageContext } from '../../context/storageContext';
 import { useContractContext } from '../../context/contractContext/contractContext';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import {ImCross} from 'react-icons/im'
 import {IoIosPersonAdd} from 'react-icons/io'
 
@@ -14,9 +14,13 @@ const toBase64 = file => new Promise((resolve, reject) => {
     reader.onerror = error => reject(error);
 });
 const Register = () => {
+    const navigate = useNavigate()
     const [formData,setFormData] = useState();
     const {uploadUserProfile,notifyWarning} = useStorageContext();
-    const {currentAccount} = useContractContext();
+    const {
+        currentAccount, 
+        register,
+      } = useContractContext();
 
     const handleFormSubmit = async(e)=>{
         e.preventDefault();
@@ -32,7 +36,10 @@ const Register = () => {
        console.log("userform",formData)
        //upload the user form if there is a connected wallet
        if(currentAccount && formData){
-        await uploadUserProfile(formData)
+        const userResponse = await uploadUserProfile(formData)
+        await register(userResponse)
+        navigate('/dashboard')
+
        }else if(!currentAccount){
         notifyWarning('Please connect your wallet');
        }else if(!formData){
