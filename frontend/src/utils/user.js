@@ -1,4 +1,4 @@
-userContractABI= [
+export const userContractABI= [
     {
       "inputs": [],
       "stateMutability": "nonpayable",
@@ -219,4 +219,4 @@ userContractABI= [
       "type": "function"
     }
   ]
-userContractAddress="0x983a67Cd26b21AEA5DECe4DfACB9F8fE7D495C55"
+export const userContractAddress="0x983a67Cd26b21AEA5DECe4DfACB9F8fE7D495C55"

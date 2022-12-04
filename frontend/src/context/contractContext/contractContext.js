@@ -4,6 +4,7 @@ import Web3 from "web3";
 import { toast } from "react-toastify";
 import { truElectContractABI, truElectContractAddress } from "../../utils/constants";
 import { truElectTokenABI, truElectTokenAddress } from "../../utils/tokenConstants";
+import { userContractABI, userContractAddress } from "../../utils/user";
 export const ConnectContext = createContext();
 
 const { ethereum } = window;
@@ -77,11 +78,22 @@ const truElectContractWeb = async()=>{
   );
   return contract;
 }
+const userContractWeb = async()=>{
+  window.web3 = new Web3(window.web3);
+  let web3 = window.web3;
+  const contract = new web3.eth.Contract(
+    userContractABI, userContractAddress 
+  );
+  return contract;
+}
 
+// user contract functions
 
 
 const register = async(cid) =>{
-  const contract = truElectContract();
+  const contract = userContractWeb.methods;
+
+  console.log(contract)
   notifyInfo("Registering....");
   console.log("Registering....");
 
@@ -97,6 +109,8 @@ const register = async(cid) =>{
  }
 
 }
+
+register('hello')
 
 const getUserProfile = async() =>{
   const contract = truElectContract();
