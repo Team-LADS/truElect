@@ -338,4 +338,4 @@ export const truElectTokenABI =  [
     "type": "function"
   }
 ]
-  export const truElectTokenAddress ="0x5FbDB2315678afecb367f032d93F642f64180aa3"
+  export const truElectTokenAddress ="0x4B4d118567645FFfA9aF12F6D32a52EB91726f73"

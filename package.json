@@ -1,4 +1,13 @@
 {
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "coverage:l": "npx hardhat coverage --network localhost",
+    "coverage:m": "npx hardhat coverage --network mumbai",
+    "deploy:l": "npx hardhat run scripts/deploy.js --network localhost",
+    "deploy:m": "npx hardhat run scripts/deploy.js --network mumbai",
+    "verify:m": "npx hardhat verify --network mumbai"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.1",
     "@nomiclabs/hardhat-etherscan": "^3.1.2",
@@ -7,6 +16,7 @@
     "@openzeppelin/contracts": "^4.8.0",
     "@tenderly/hardhat-tenderly": "^1.3.2",
     "chai": "^4.3.7",
+    "coverage": "^0.4.1",
     "dotenv": "^16.0.3",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.7.2",

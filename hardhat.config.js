@@ -73,7 +73,12 @@ module.exports = {
       default: 0, // here this will by default take the first account as deployer
     },
   },
-  plugins:["solidity-coverage"]
+  plugins:["solidity-coverage"],
+  etherscan: {
+    apiKey: {
+      polygonMumbai: process.env.POLYGON_KEY 
+    }
+  }
 };
 const DEBUG = false;
 function debug(text) {
