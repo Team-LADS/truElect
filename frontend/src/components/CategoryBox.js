@@ -4,7 +4,8 @@ import "../output.css";
 import { useContractContext } from '../context/contractContext/contractContext';
 import { useState } from "react"
 const CategoryBox = () => {
-    const { AddCategory,candidateList ,GetListOfCategory} = useContractContext();
+    const { AddCategory} = useContractContext();
+    // const { AddCategory,candidateList ,GetListOfCategory} = useContractContext();
 
 
     const [category, setCategory] = useState("")
@@ -12,7 +13,7 @@ const CategoryBox = () => {
 
     const handleAdd = async () => {
        
-     const res =    await AddCategory(category)
+         await AddCategory(category)
 
     }
 

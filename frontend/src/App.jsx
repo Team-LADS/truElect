@@ -22,7 +22,7 @@ const App = () => {
 const {themeState} = useThemeContext()
 
 
-const {check,getUserProfile,currentAccount} = useContractContext();
+// const {check,getUserProfile,currentAccount} = useContractContext();
 
 
 // const getBal = async()=>{

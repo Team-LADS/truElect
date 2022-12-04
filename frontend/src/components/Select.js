@@ -12,8 +12,10 @@ const [cat,setCat] = useState([])
 
 useEffect(()=>{
     GetListOfCategory().then((res)=>{setCat(res)})
-},[])
-    let {name,category, array, defaultOption, handleChange, ref} = props
+},[cat])
+
+    let {name,category, defaultOption, handleChange} = props
+    // let {name,category, array, defaultOption, handleChange, ref} = props
     let classes = classnames([`w-full`, `py-[10px]`, `px-[16px]`, `border`, `border-gray-400 rounded`, "focus:outline-none"])
     return (
         <select 

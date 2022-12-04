@@ -1,6 +1,8 @@
 import './register.css';
-import {BiError, BiHandicap} from 'react-icons/bi'
-import { useState , useHistory} from 'react';
+// import {BiError, BiHandicap} from 'react-icons/bi'
+// import { useState , useHistory} from 'react';
+import {BiError} from 'react-icons/bi'
+import { useState} from 'react';
 import { useStorageContext } from '../../context/storageContext';
 import { useContractContext } from '../../context/contractContext/contractContext';
 import {Link,useNavigate} from 'react-router-dom';

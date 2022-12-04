@@ -12,7 +12,7 @@ import '../index.css'
 
 const Home = () => {
   const {themeState} = useThemeContext()
-  const {userProfile,GetUserProfile,UploadUserProfile} = useStorageContext()
+  // const {userProfile,GetUserProfile,UploadUserProfile} = useStorageContext()
   
   return (
     <main className={`${themeState.primary} ${themeState.background}`} >

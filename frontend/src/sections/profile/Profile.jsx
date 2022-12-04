@@ -16,7 +16,7 @@ const Profile = () => {
        {userProfile && <div className="profile">
           <div className="profile__image">
             <div className="profile__image-img">
-              <img src={`${userProfile.pi}`}/>
+              <img src={`${userProfile.pi}`} alt=""/>
             </div>
             <div className="profile__image-details">
                 <h3>{userProfile.fullName}</h3>
