@@ -4,7 +4,6 @@ import Web3 from "web3";
 import { toast } from "react-toastify";
 import { truElectContractABI, truElectContractAddress } from "../../utils/constants";
 import { truElectTokenABI, truElectTokenAddress } from "../../utils/tokenConstants";
-import Web3 from "web3";
 export const ConnectContext = createContext();
 
 const { ethereum } = window;
@@ -447,7 +446,6 @@ const check = async(role, addr) => {
   
  }
 }
-check("admin",'0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199')
 
 
 const pauseContract = async(value) => {
