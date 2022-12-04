@@ -402,6 +402,7 @@ const GetListOfCategory = async(_category) => {
     const accounts = await web3.eth.getAccounts();
     // const networkId = await web3.eth.net.getId();
     // const daiToken = DaiTokenAbi.networks[networkId];
+    console.log(accounts)
   let test =   new web3.eth.Contract(
     truElectContractABI,
     truElectContractAddress
@@ -415,17 +416,17 @@ const GetListOfCategory = async(_category) => {
   // console.log("ere",truElectContract.getUserProfile())
   // return truElectContract;
 
- try {
-  //  const contract = truElectContract();
-// console.log({contract})
-  // return await contract.getListOfCategory()
+//  try {
+//   //  const contract = truElectContract();
+// // console.log({contract})
+//   // return await contract.getListOfCategory()
   
-  }
- catch(error){
-   console.log(error)
-   notifyError("error,"+ error.message);
+//   }
+//  catch(error){
+//    console.log(error)
+//    notifyError("error,"+ error.message);
   
- }
+//  }
 }
 
 const check = async(role, addr) => {

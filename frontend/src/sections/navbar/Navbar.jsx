@@ -15,13 +15,14 @@ import { useEffect } from 'react';
 const Navbar = () => {
   const {showModalHandler} = useModalContext();
   const [showLinks,setShowLinks] = useState(false)
-  const [connect,setConnect] = useState('');
+  const [setConnect] = useState('');
+  // const [connect,setConnect] = useState('');
   const [navSm,setNavSm] = useState('');
   const {
     connectWallet,
     currentAccount, 
-    register,
-    getUserProfile
+    // register,
+    // getUserProfile
   } = useContractContext();
   const {userProfile,getUserProfileStorage} = useStorageContext();
 
@@ -64,7 +65,7 @@ const Navbar = () => {
           {/* <li className={`connect ${connect} walcon`}> */}
               {
               
-              !currentAccount &&   <li ><a className=" btn sm" href="#" onClick={()=>connectWallet()}>Connect Wallet</a></li>
+              !currentAccount &&   <li ><button className=" btn sm"  onClick={()=>connectWallet()}>Connect Wallet</button></li>
             } 
             {
                !userProfile &&  <li ><a className=" btn sm" href="/register">Register</a></li>
@@ -84,7 +85,7 @@ const Navbar = () => {
         currentAccount && <li className="light__green"></li>
       }
       {
-        currentAccount && <li className="connected " ><a className="connected btn sm" href='#'>{currentAccount}</a></li>
+        currentAccount && <li className="connected " ><button className="connected btn sm" >{currentAccount}</button></li>
        }
       </ul>
      
