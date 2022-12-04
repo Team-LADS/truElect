@@ -1,0 +1,192 @@
+body,.register{
+ background-image: linear-gradient(to bottom right, #5E1D93 3%,rgba(175, 156, 202, 0) 20%,rgba(175, 156, 202, 0) 100%) ,radial-gradient(circle,#5E1D93 5%,rgba(175, 156, 202, 0) 20%,rgba(175, 156, 202, 0) 30%,#5E1D93 31%,rgba(175, 156, 202, 0) 32%,rgba(175, 156, 202, 0) 32%,rgba(175, 156, 202, 0) 36%,#5E1D93 37%,rgba(175, 156, 202, 0) 38%,rgba(175, 156, 202, 0) 41%,#5E1D93 42%,rgba(175, 156, 202, 0) 43%,rgba(175, 156, 202, 0) 100%) !important;
+ height: 100vh;
+ 
+}
+.register{
+    padding-top: 0rem;
+}
+form{
+    background-color: #fefefe;
+    padding: 30px;
+    margin:10px 0 0 0;
+    border-radius: 8px;
+    position:relative;
+    z-index: 1;
+    box-shadow: 0px 4px 7px 0px hsl(249, 10%, 26%);
+}
+.form__element{
+    margin-inline: 10rem;
+    padding: 4rem 10rem;
+    position: relative;
+
+}
+.form__element h2{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.form-group{
+    margin-bottom:6px;
+    width:100%;
+    position:relative;
+    margin-bottom: 15px;
+    
+}
+.activeErrorMargin{
+    margin-bottom: 18px;
+}
+
+.form-group label{
+    display:none;
+    color:hsl(0, 100%, 74%);
+    font-size: 11px;
+    position:absolute;
+    bottom: -44%;
+    width:100%;
+    text-align: right;
+    padding: 0;
+    
+}
+.danger{
+    border-color:hsl(0, 100%, 74%);
+}
+.success{
+    border-color:hsl(154, 59%, 51%);
+}
+.error:not(.btn){
+    display:none;
+    position:absolute;
+    color:red;
+    right:0;
+    font-size: 1.7rem;
+    font-weight: 700;
+    width: 8px;
+    height: 8px;
+    border-radius: 21px;
+    z-index: 2;
+    top: 18%;
+    left:85%;
+
+}
+input, button,select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    font-size:16px;
+    font-family: "Poppins", sans-serif;
+}
+button{
+    width: 100%;
+    padding:10px 0 10px 0;
+    margin-top: 15px;
+    color:#fefefe;
+    background-color: hsl(154, 59%, 51%);
+}
+input:focus{
+    border-color:hsl(249, 10%, 26%);
+}
+input:not(:placeholder-shown):focus:invalid{
+    border-color: hsl(0, 100%, 74%) ;
+}
+input:not(:placeholder-shown):focus:invalid ~ .error,
+input:not(:placeholder-shown):invalid ~ .error,
+input:not(:placeholder-shown):invalid ~ label,
+input:not(:placeholder-shown):focus:invalid ~ label
+{
+    display:block;
+}
+
+#pi::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  #pi::before {
+    content: 'Select some files';
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+  #pi:hover::before {
+    border-color: black;
+  }
+  #pi:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }
+  .maingroup{
+    display: flex;
+    gap:1rem;
+  }
+  .close{
+    position: absolute;
+    right: 2rem;
+    top: 0;
+    padding:1rem 0;
+    margin:1rem 0;
+    font-size: 1.6rem;
+    color: white;
+    z-index: 100;
+}
+.icon{
+    
+    font-size: 4rem;
+    border: 1px solid white;
+    display: grid;
+    place-items: center;
+    width: 5rem;
+    height: 5rem;
+    color: white;
+    border-radius: 50%;
+    margin: auto;
+   }
+
+/* Media Queries (Tablets) */
+@media screen and (max-width:1024px) {
+    .form__element{
+        margin-inline: 4rem;
+        padding: 4rem 4rem;
+        position: relative;
+    
+    }
+}
+/* Media Queries (Phones) */
+@media screen and (max-width:1024px) {
+    .form__element{
+        margin-inline: .5rem;
+        padding: 2rem 1rem;
+        position: relative;
+    
+    }
+    .error:not(.btn){
+        font-size: 1rem;
+        top: 30%;
+        left:83%;
+    }
+    input, button,select{
+        font-size: .84rem;
+    }
+    .icon{
+    
+        font-size: 3rem;
+        border: 1px solid white;
+        display: grid;
+        place-items: center;
+        width: 4rem;
+        height: 4rem;
+     
+       }
+       .close{
+        font-size: 1.3rem;
+       }
+
+}
