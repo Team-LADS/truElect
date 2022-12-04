@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../output.css";
-import Chart from 'react-apexcharts';
+// import Chart from 'react-apexcharts';
 import ReactApexChart from "react-apexcharts";
 
 
@@ -50,8 +50,10 @@ const PercentageVoters = () => {
         }]
       };
 
-    let [series, setSeries] = useState(chartSeries);
-    let [options, setOptions] = useState(chartOptions);
+    let [series] = useState(chartSeries);
+    let [options] = useState(chartOptions);
+    // let [series, setSeries] = useState(chartSeries);
+    // let [options, setOptions] = useState(chartOptions);
 
     return (
         <div className=" flex justify-center items-center pt-3 ">

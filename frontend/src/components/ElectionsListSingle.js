@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../output.css";
-import ReactApexChart from "react-apexcharts";
+// import ReactApexChart from "react-apexcharts";
 
 
 const ElectionsListSingle = ({props}) => {
@@ -8,7 +8,8 @@ const ElectionsListSingle = ({props}) => {
 
     let chartSeries = [21, 22, 10, 28, 16, 21, 13, 30, 22, 10, 28, 16, 21, 22, 10, 28, 16, 21, 13, 30, 22, 10, 28]
 
-    let [series, setSeries] = useState(chartSeries);         
+    // let [series, setSeries] = useState(chartSeries);         
+    let [series] = useState(chartSeries);         
 
     return (
         <div className="h-[70px]  rounded-l-full rounded-r-full bg-violet-600 flex my-[2px] py-1" key={"div" + idx} 

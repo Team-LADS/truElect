@@ -39,8 +39,10 @@ const TimeLeft = () => {
         }]
       };
 
-    let [series, setSeries] = useState(chartSeries);
-    let [options, setOptions] = useState(chartOptions);
+    let [series ] = useState(chartSeries);
+    let [options] = useState(chartOptions);
+    // let [series, setSeries] = useState(chartSeries);
+    // let [options, setOptions] = useState(chartOptions);
 
     return (
         <div className=" flex justify-center items-center ">
