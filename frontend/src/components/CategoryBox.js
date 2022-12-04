@@ -11,13 +11,9 @@ const CategoryBox = () => {
     let inputRef = useRef()
 
     const handleAdd = async () => {
-        // inputRef.current.value = ""
-    //  const res =    await AddCategory(category)
-    const s =  await  GetListOfCategory()
-    //  const can=    await candidateList()
-     setCategory("")
-    //  console.log({res})
-     console.log({s})
+       
+     const res =    await AddCategory(category)
+
     }
 
     const handleDelete = () => {
