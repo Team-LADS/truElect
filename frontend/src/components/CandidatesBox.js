@@ -1,24 +1,32 @@
-import React, { useRef } from "react";
+import React, { useRef,useState } from "react";
 import "../output.css";
 import elections from "../DATA";
 import Select from "./Select";
 
+import { useContractContext } from '../context/contractContext/contractContext';
 
 const CandidatesBox = () => {
+    const { RegisterCandidate } = useContractContext();
+
     let inputRef = useRef()
     let selectRef = useRef()
-
+    const [candidate,setCandidate] = useState("")
+    const [category,setCategory] = useState("")
     let categorySelectProps = {
         name: "election",
         array: Object.keys(elections), 
         defaultOption: "Select an election",
-        handleChange: () => {},
+        handleChange: setCategory,
         ref: selectRef
     }
-
+// console.log(category)
     const handleAdd = () => {
-        console.log(selectRef.current.value, inputRef.current.value)
-        inputRef.current.value = ""
+        console.log(candidate)
+        RegisterCandidate(candidate,category)
+
+
+        // console.log(selectRef.current.value, inputRef.current.value)
+        // inputRef.current.value = ""
     }
 
     const handleDelete = () => {
@@ -31,7 +39,7 @@ const CandidatesBox = () => {
             <div className="">
                 <Select props={categorySelectProps} />
             </div>
-            <input ref={inputRef} name="candidate" 
+            <input value={candidate} onChange={(e)=>{setCandidate(e.target.value)}} name="candidate" 
                 className="w-full border border-gray-400 py-[10px] px-3 rounded focus:outline-none" 
             />
             <div className="flex justify-center gap-8">
