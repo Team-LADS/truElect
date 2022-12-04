@@ -1,5 +1,6 @@
 import { useEffect, useState, createContext ,useContext} from "react";
 import { ethers } from "ethers";
+import Web3 from "web3";
 import { toast } from "react-toastify";
 import { truElectContractABI, truElectContractAddress } from "../../utils/constants";
 import { truElectTokenABI, truElectTokenAddress } from "../../utils/tokenConstants";
@@ -66,6 +67,18 @@ const truElectContractToken = () => {
  
   return truElectToken;
 };
+
+
+const truElectContractWeb = async()=>{
+  window.web3 = new Web3(window.web3);
+  let web3 = window.web3;
+  const contract = new web3.eth.Contract(
+    truElectContractABI,
+    truElectContractAddress
+  );
+  return contract;
+}
+
 
 
 const register = async(cid) =>{
@@ -398,11 +411,13 @@ console.log({contract})
 }
 
 const check = async(role, addr) => {
-  const contract = truElectContract();
+  // const contract = truElectContract();
+  const contract = await truElectContractWeb();
   console.log({role, addr})
+  console.log(contract)
  try {
   notifyInfo('Checking voter role')
-   const result =await contract.checkVoterRole(role, addr);
+   const result =await contract.methods.checkVoterRole(role, addr);
    console.log(result)
   notifySuccess('Successfully checked')
   return result
@@ -413,7 +428,9 @@ const check = async(role, addr) => {
   
  }
 }
-// check()
+check("admin",'0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199')
+
+
 const pauseContract = async(value) => {
   const contract = truElectContract();
   
