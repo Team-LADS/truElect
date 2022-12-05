@@ -5,9 +5,7 @@ import { useContractContext } from '../context/contractContext/contractContext';
 import { useState } from "react"
 const CategoryBox = () => {
     const { AddCategory} = useContractContext();
-    // const { AddCategory,candidateList ,GetListOfCategory} = useContractContext();
-
-
+     
     const [category, setCategory] = useState("")
     let inputRef = useRef()
 
