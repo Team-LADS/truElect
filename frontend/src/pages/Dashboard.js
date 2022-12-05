@@ -11,19 +11,18 @@ import ElectionsListBox from "../components/ElectionsListBox";
 import ActiveElections from "../components/ActiveElections";
 import MainBox from "../components/MainBox";
 import PercentageVoters from "../components/PercentageVoters";
+import Csv from '../components/Csv';
+import SetUpElection from "../components/SetUpElection";
+import CategoryList from '../components/CategoryList';
+import CandidatesList from '../components/CandidatesList';
+import { BsDisplay } from 'react-icons/bs';
 
 
 const Dashboard = () => {
     
     return (
         <div className="w-full min-h-screen font-poppins mx-0 bg-[#151314] py-8 px-16 grid grid-cols-8  grid-rows-[250px_200px_200px_250px] gap-3 grid-flow-row">
-            <div className="col-span-2 row-span-2">
-                <ErrorBoundary>
-                    <Box>
-                        <ElectionsListBox />
-                    </Box>
-                </ErrorBoundary>
-            </div>
+    
             <div className="col-span-2">
                 <ErrorBoundary>
                     <Box>
@@ -31,6 +30,7 @@ const Dashboard = () => {
                     </Box>
                 </ErrorBoundary>
             </div>
+          
             <div className="col-span-2">
                 <ErrorBoundary>
                     <Box>
@@ -52,7 +52,7 @@ const Dashboard = () => {
                     </Box>
                 </ErrorBoundary>
             </div>
-            <div className="row-span-2 col-span-2 ">
+            <div className="row-span-1 col-span-2 ">
                 <ErrorBoundary>
                     <Box>
                         <VotersBox />
@@ -77,6 +77,34 @@ const Dashboard = () => {
                 <ErrorBoundary>
                     <Box>
                         <ElectionCommitteeBox />
+                    </Box>
+                </ErrorBoundary>
+            </div>
+            <div className="col-span-2">
+                <ErrorBoundary>
+                    <Box>
+                        <Csv />
+                    </Box>
+                </ErrorBoundary>
+            </div>
+            <div className="col-span-2">
+                <ErrorBoundary>
+                    <Box>
+                        <SetUpElection />
+                    </Box>
+                </ErrorBoundary>
+            </div>
+            <div className="col-span-2">
+                <ErrorBoundary>
+                    <Box>
+                        <CategoryList />
+                    </Box>
+                </ErrorBoundary>
+            </div>
+            <div className="col-span-2">
+                <ErrorBoundary>
+                    <Box>
+                        <CandidatesList />
                     </Box>
                 </ErrorBoundary>
             </div>

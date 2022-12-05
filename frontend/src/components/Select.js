@@ -12,7 +12,7 @@ const [cat,setCat] = useState([])
 
 useEffect(()=>{
     GetListOfCategory().then((res)=>{setCat(res)})
-},[cat])
+},[GetListOfCategory])
 
     let {name,category, defaultOption, handleChange} = props
     // let {name,category, array, defaultOption, handleChange, ref} = props

@@ -110,7 +110,7 @@ const register = async(cid) =>{
 
 }
 
-register('hello')
+// register('hello')
 
 const getUserProfile = async() =>{
   const contract = truElectContract();
@@ -158,7 +158,7 @@ const setupElection = async(_category, idArr, allowanceArr) => {
  
  }
 }
-const mint = async(role, amount, Arr) => {
+const mint = async( Arr) => {
   const contract = truElectContractToken();
   notifyInfo("minting...");
  try {
