@@ -33,7 +33,7 @@ const [candidate,setCandidate] = useState([])
         candidateList().then((res)=>{
             setCandidate(res)
         })
-    },[candidate])
+    },[])
     return (
         <div className="main-content w-full h-full text-black text-xl font-bold flex flex-col overflow-y-auto py-4 px-2 flex-none">
             <h2 className="text-center text-violet-300 font-medium text-lg mb-4">List of Voters</h2>

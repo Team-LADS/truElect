@@ -70,13 +70,19 @@ const truElectContractToken = () => {
 
 
 const truElectContractWeb = async()=>{
+if (window.ethereum) {
+  window.web3 = new Web3(window.ethereum);
+  await window.ethereum.enable();
+} else if (window.web3) {
   window.web3 = new Web3(window.web3);
-  let web3 = window.web3;
-  const contract = new web3.eth.Contract(
-    truElectContractABI,
-    truElectContractAddress
-  );
-  return contract;
+} else {
+  alert("blockchain browser not found .please install metamask");
+}
+let web3 = window.web3;
+return  new web3.eth.Contract(
+truElectContractABI,
+truElectContractAddress
+);
 }
 const userContractWeb = async()=>{
   window.web3 = new Web3(window.web3);
@@ -91,10 +97,9 @@ const userContractWeb = async()=>{
 
 
 const register = async(cid) =>{
-  const contract = userContractWeb.methods;
+  const contract = (await userContractWeb()).methods;
 
-  console.log(contract)
-  notifyInfo("Registering....");
+  // notifyInfo("Registering....");
   console.log("Registering....");
 
   try {
@@ -263,9 +268,8 @@ const candidateName = async(id) => {
 }
 const AddCategory = async(_category) => {
   const contract = truElectContract();
-  notifyInfo("adding category");
  try {
-   const result =await contract.addElectionCategory(_category);
+   const result = await contract.addElectionCategory(_category);
    
    notifySuccess("category added");
 
@@ -344,19 +348,8 @@ const electionList = async() => {
  }
 }
 const candidateList = async() => {
-  const contract = truElectContract();
-  
- try {
-  notifyInfo('Fetching Candidates list')
-   const result = await contract.getListOfCandidates();
-  notifySuccess('Candidates List successfully fetched')
-  return result
-  }
- catch(error){
-   console.log(error)
-   notifyError("error,"+ error.message);
-  
- }
+  const contract = await truElectContractWeb().then((contract)=>contract.methods);
+  return await  contract.getListOfCandidates().call();
 }
 
 const Compile = async(_category) => {
@@ -403,54 +396,19 @@ const getResult = async(_category) => {
  }
 }
 const GetListOfCategory = async(_category) => {
-  // const loadWeb3 = async () => {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3);
-    } else {
-      alert("blockchain browser not found .please install metamask");
-    }
-    let web3 = window.web3;
-    const accounts = await web3.eth.getAccounts();
-    // const networkId = await web3.eth.net.getId();
-    // const daiToken = DaiTokenAbi.networks[networkId];
-    console.log(accounts)
-  let test =   new web3.eth.Contract(
-    truElectContractABI,
-    truElectContractAddress
-    );
-  return await test.methods.getListOfCategory().call()
-    // console.log(test);
-  // };
-  // const provider = new ethers.providers.Web3Provider(ethereum);
-  // // const signer = provider;
-  // const contract = new ethers.Contract(truElectContractAddress, truElectContractABI, provider);
-  // console.log("ere",truElectContract.getUserProfile())
-  // return truElectContract;
-
-//  try {
-//   //  const contract = truElectContract();
-// // console.log({contract})
-//   // return await contract.getListOfCategory()
+  const contract = await truElectContractWeb().then((contract)=>contract.methods);
+  return await contract.getListOfCategory().call()
   
-//   }
-//  catch(error){
-//    console.log(error)
-//    notifyError("error,"+ error.message);
-  
-//  }
 }
 
 const check = async(role, addr) => {
-  // const contract = truElectContract();
-  const contract = await truElectContractWeb();
+  const contract = await truElectContractWeb().then((contract)=>contract.methods);
+
   console.log({role, addr})
   console.log(contract)
  try {
   notifyInfo('Checking voter role')
-   const result =await contract.methods.checkVoterRole(role, addr);
+   const result =await contract.checkVoterRole(role, addr);
    console.log(result)
   notifySuccess('Successfully checked')
   return result
@@ -465,6 +423,7 @@ const check = async(role, addr) => {
 
 const pauseContract = async(value) => {
   const contract = truElectContract();
+  // const contract = truElectContract();
   
  try {
   notifyWarning('Pausing Contract ...')
