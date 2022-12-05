@@ -465,6 +465,7 @@ const check = async(role, addr) => {
 
 const pauseContract = async(value) => {
   const contract = truElectContract();
+  // const contract = truElectContract();
   
  try {
   notifyWarning('Pausing Contract ...')
