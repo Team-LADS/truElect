@@ -502,7 +502,7 @@ contract TruElect {
 
         /** @notice check that balance of voter is greater than zero.. 1 token per votes */
         require(
-            tetToken.balanceOf(msg.sender) == 1*1e18,
+            tetToken.balanceOf(msg.sender) >= 1*1e18,
             "YouR balance is currently not sufficient to vote. Not a voter"
             );
       

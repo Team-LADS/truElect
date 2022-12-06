@@ -115,10 +115,25 @@ const register = async(cid) =>{
 
 }
 
-// register('hello')
+// verify user profile(can only be called by the election body)
+const verifyUserProfile = async(userAddress,electionBodyName)=>{
+    try {
+      const contract = (await userContractWeb()).methods;
+      // notifyInfo("Verifying....");
+      const result =  await contract.verify(userAddress,electionBodyName, {gasLimit:300000});
+      notifySuccess("Verified successfully");
+      return result
+    } catch (error) {
+      notifyError("error,"+ error.message);
+    }
+}
+
+// get user profile
 
 const getUserProfile = async() =>{
-  const contract = truElectContract();
+  // const contract = truElectContract();
+  const contract = (await userContractWeb()).methods;
+
   notifyInfo("Fetching User....");
 
   try {
@@ -132,6 +147,31 @@ const getUserProfile = async() =>{
   
    }
 } 
+
+// add election body by the admin
+const addElectionBody= async(bodyAddress)=>{
+  try {
+    const contract = (await userContractWeb()).methods;
+    // notifyInfo("Adding body....");
+    const result =  await contract.addElectionBody(bodyAddress, {gasLimit:300000});
+    notifySuccess("Added successfully");
+    return result
+  } catch (error) {
+    notifyError("error,"+ error.message);
+  }
+}
+// add election boy by thet admin
+const getUserStatus= async(userAddress,electionBodyName)=>{
+  try {
+    const contract = (await userContractWeb()).methods;
+    // notifyInfo("Checking User Status....");
+    const result =  await contract.getUserStatus(userAddress,electionBodyName, {gasLimit:300000});
+    notifySuccess("successful!");
+    return result
+  } catch (error) {
+    notifyError("error,"+ error.message);
+  }
+}
 
 
 

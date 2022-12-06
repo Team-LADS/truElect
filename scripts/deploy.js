@@ -23,7 +23,7 @@ async function main(){
      // here we deploy the contract
     const deployedTruElectTokenContract = await TruElectTokenContract.connect(owner).deploy();
 
-    // Wait for it to finish deploying
+//     // Wait for it to finish deploying
   await deployedTruElectTokenContract.deployed();
 
   // print the address of the deployed contract
@@ -89,7 +89,7 @@ main()
     const captureUserContractAddress = userContractAddress;
 
 
-    //capture election contract address and abi
+    // capture election contract address and abi
     const captureElectionAbi = JSON.parse(readElectionContractAbifile).abi
     const captureElectionContractAddress = electionContractAddress;
 
