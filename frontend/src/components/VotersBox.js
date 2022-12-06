@@ -40,7 +40,7 @@ const [candidate,setCandidate] = useState([])
             <div>
                 {votersList}
             </div>
-            <div className="flex gap-4 justify-center mt-10 text-white font-normal text-sm">
+            <div className="flex gap-3 justify-center mt-10 text-white font-normal text-sm">
                 <button className="py-2 px-4 rounded text-white bg-[#5C0CC7] hover:bg-violet-600 active:scale-95">
                     Upload
                 </button>

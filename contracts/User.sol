@@ -70,9 +70,9 @@ contract User{
     }
 
     /**@dev function to verify user from an authorized body*/
-    function verify(address user,string memory election,string memory electionBody) onlyElectionBody(electionBody) public{
+    function verify(address user,string memory electionBody) onlyElectionBody(electionBody) public{
         require(isValid[msg.sender]['registered'] == true,'Not Registered');
-        isValid[user][election] = true;
+        isValid[user][electionBody] = true;
         emit Verify(msg.sender,user,'Verified');
     }
 

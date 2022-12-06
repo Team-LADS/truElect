@@ -12,7 +12,7 @@ const TimeLeft = () => {
         plotOptions: {
             radialBar: {
               hollow: {
-                size: '55%',
+                size: '50%',
               },
               dataLabels: {
                 value: {
@@ -30,7 +30,7 @@ const TimeLeft = () => {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: 150
             },
             legend: {
               position: 'bottom'
@@ -46,7 +46,7 @@ const TimeLeft = () => {
 
     return (
         <div className=" flex justify-center items-center ">
-            <Chart options={options} series={series} type="radialBar" height={320} />
+            <Chart options={options} series={series} type="radialBar" height={180} />
         </div>
     )
 }

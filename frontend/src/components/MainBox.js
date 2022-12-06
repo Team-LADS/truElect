@@ -63,7 +63,7 @@ const MainBox = () => {
         <div className="w-full h-full flex items-center">
             <div className="w-2/3 h-full py-4">
               <h2 className="text-center text-violet-300 font-medium text-lg mb-4">
-                Change Election Comittee Head
+                Active Election Chart
               </h2>
               <Chart options={options} series={series} type="bar" height={330} />
             </div>
@@ -76,7 +76,7 @@ const MainBox = () => {
               <div className="w-full h-1/2">
                 <TimeLeft />
               </div>
-              <div className="w-full flex items-end justify-center gap-4">
+              <div className="w-full flex items-end mr-8 justify-center gap-4">
                 <button className="py-2 px-4 rounded text-white bg-[#5C0CC7] hover:bg-violet-600 active:scale-95">
                     Start
                 </button>
