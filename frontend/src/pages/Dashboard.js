@@ -27,7 +27,7 @@ const Dashboard = () => {
     // "w-full min-h-screen font-poppins mx-0 bg-[#151314] py-8 px-16 grid grid-cols-8  grid-rows-[250px_200px_200px_250px] gap-3 grid-flow-row"
 
     return (
-        <div style={styleDash}>
+        <div style={styleDash} className="dash">
 
             <div className="l__part ">
                 <div className=" ">
@@ -51,6 +51,13 @@ const Dashboard = () => {
                         </Box>
                     </ErrorBoundary>
                 </div>
+                <div className="vt">
+                    <ErrorBoundary>
+                        <Box>
+                            <ElectionsBox />
+                        </Box>
+                    </ErrorBoundary>
+                </div> 
             </div>
             <div className="r__part">
                 <div className=" mainbox">
@@ -60,15 +67,15 @@ const Dashboard = () => {
                         </Box>
                     </ErrorBoundary>
                 </div>
-                <div className="">
+                {/* <div className="votes">
                     <ErrorBoundary>
                         <Box>
                             <ElectionsBox />
                         </Box>
                     </ErrorBoundary>
-                </div> 
+                </div>  */}
             
-                <div className="">
+                <div className="activeel">
                     <ErrorBoundary>
                         <Box>
                             <ActiveElections />
