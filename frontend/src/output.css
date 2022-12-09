@@ -1123,7 +1123,8 @@ video {
   overflow-x: scroll;
 }
 .l__part > div{
-  max-height: 250px;
+  max-height: 200px;
+
 }
 .mainbox{
   padding-bottom: 1rem;

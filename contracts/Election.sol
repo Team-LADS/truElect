@@ -90,8 +90,8 @@ contract TruElect {
     address[] private voteToRemoveCH;
 
     /**@notice election committee counter */
-    uint256 electionCommitteeCount;
-    
+    uint256 public electionCommitteeCount;
+
     /// ------------------------------------- MAPPING ------------------------------------------ ///
     /** @notice mapping for list of voters addresses */
     mapping(address => Voter) public voters;
@@ -285,7 +285,9 @@ contract TruElect {
             voters[_voter].isRegistered == true,
             "Can't assign a role of election committee head to a non voter."
             );
-        uint256 voteToRemoveCHCheckpoint = 80 * electionCommitteeCount;
+        uint256 voteToRemoveCHCheckpoint = 75 * electionCommitteeCount;
+
+        console.log(electionCommitteeCount,"elsecommision herrrr,",voteToRemoveCHCheckpoint,voteToRemoveCH.length * 100);
         require(
             voteToRemoveCH.length * 100 > voteToRemoveCHCheckpoint,
             "Requires Greater than 80% consent of the election committee to approve!"
