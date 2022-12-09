@@ -306,6 +306,18 @@ const candidateName = async(id) => {
  
  }
 }
+const GetCandidates = async(id) => {
+  const contract = truElectContract();
+  
+ try {
+   const result =await contract.getListOfCandidates();
+  return result
+  }
+ catch(error){
+  notifyError("error,"+ error.message);
+ 
+ }
+}
 const AddCategory = async(_category) => {
   const contract = truElectContract();
  try {
@@ -574,7 +586,8 @@ export const ConnectProvider = ({ children }) =>{
           voteConsensus,
           register,
           getUserProfile,
-          GetListOfCategory
+          GetListOfCategory,
+          GetCandidates,
         }}
       >
         {children}
