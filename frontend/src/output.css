@@ -1124,7 +1124,9 @@ video {
 }
 .l__part > div{
   max-height: 200px;
-
+}
+.categoryList{
+  overflow-y: scroll;
 }
 .mainbox{
   padding-bottom: 1rem;

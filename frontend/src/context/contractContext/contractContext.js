@@ -449,8 +449,7 @@ const getResult = async(_category) => {
 }
 const GetListOfCategory = async(_category) => {
   const contract = await truElectContractWeb().then((contract)=>contract.methods);
-  return await contract.getListOfCategory().call()
-  
+  return await contract.getListOfCategory().call();
 }
 
 const check = async(role, addr) => {

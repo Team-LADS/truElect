@@ -10,14 +10,15 @@ import { ethers } from "ethers";
 const CandidatesList = () => {
     const [showCandidate, setShowCandidate] = useState(false);
     const [candidate, setCandidate] = useState([]);
-    // const catList = Array(4).fill('candidates')
-    console.log(ethers.utils.formatEther(candidate[0]?.category))
-    console.log (candidate[0]?.category.hex
-        )
-    const categoryName = Array(4).fill('categoryName')
-    const { GetCandidates } = useContractContext();
+    const [category, setCategory] = useState([]);
+ 
+    const { candidateList,GetListOfCategory } = useContractContext();
     useEffect(()=>{
-        GetCandidates().then((res)=>setCandidate(res))
+        candidateList().then((res)=>{
+            setCandidate(res)})
+
+        GetListOfCategory().then((res)=>{
+            setCategory(res)})
              },[])
     return (
       <div className='categoryList__container w-full h-full flex flex-col justify-between py-4 px-4'>
@@ -27,7 +28,7 @@ const CandidatesList = () => {
                   <Pack key={ind} className="cat__list"> 
                     <Card className='cad' onClick={()=>setShowCandidate(prev=>!prev)}>
                         <div>
-                            <h5 className='cad__question'>{categoryName[ind]}</h5>
+                            <h5 className='cad__question'>{category[cad[2]-1]}</h5>
                             <button className="cad__icon" >
                                 {showCandidate? <AiOutlineMinus/>: <AiOutlinePlus/>
                                 }
