@@ -1,4 +1,7 @@
 .cat__list{
-    padding: .8rem 2rem;
+    padding: .8rem .5rem;
     text-align: center;
+}
+.cad__icon{
+    max-width: 1.5rem;
 }

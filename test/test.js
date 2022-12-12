@@ -335,6 +335,7 @@ describe("Set up election...",function(){
         const checkOutput = await setUpAnElection.wait();
         expect(checkOutput.status).to.be.equal(1);
         console.log('\t',"Passed ...."); 
+        
    
     });
     it("Should only be able to Set up an election when contract is not paused",async function(){
@@ -768,30 +769,30 @@ describe("Change election committee head role... and concensus voting",function(
        
     })
     it("Should not be able to Change election committee head role if caller is not an member of the election committee",async function(){
-        const [owner,secondAddress,thirdAddress] = await ethers.getSigners();
+        const [owner,secondAddress,thirdAddress,eightAddress] = await ethers.getSigners();
         console.log('\t',"Attempting to Change election committee head role as a non member of the election committee....");
-        await expect(votingContract.connect(secondAddress).changeElectionCommHead(secondAddress.address)).to.be.revertedWith("Only the election committee have access");
+        await expect(votingContract.connect(eightAddress).changeElectionCommHead(eightAddress.address)).to.be.revertedWith("Only the election committee have access");
         console.log('\t',"Passed ....");
     });
    
     it("Should revert if address is a non voter",async function(){
         const [owner,secondAddress,thirdAddress,fourthAddress,fifthAddress,sixthAddress,seventhAddress,eightAddress,ninthAddress] = await ethers.getSigners();
         console.log('\t',"Attempting to Change election committee head role to a non voter....");
-        await expect(votingContract.connect(eightAddress).changeElectionCommHead(ninthAddress.address)).to.be.revertedWith("Can't assign a role of election committee head to a non voter.")
+        await expect(votingContract.connect(secondAddress).changeElectionCommHead(ninthAddress.address)).to.be.revertedWith("Can't assign a role of election committee head to a non voter.")
         addVoter1 = await votingContract.connect(owner).uploadListOfVoters("electionCommittee",3,[ninthAddress.address]) 
         console.log('\t',"Passed ....");
     });
     it("Should revert if votes to remove committee head is less than 80% from the member of the election committee",async function(){
         const [owner,secondAddress,thirdAddress,fourthAddress,fifthAddress,sixthAddress,seventhAddress,eightAddress,ninthAddress] = await ethers.getSigners();
         console.log('\t',"Attempting to Change election committee head role when votes to remove committee head is less than 80% from the members of the election committee");
-        await expect(votingContract.connect(eightAddress).changeElectionCommHead(ninthAddress.address)).to.be.revertedWith("Requires Greater than 75% consent of members of the election committee to approve!") 
+        await expect(votingContract.connect(secondAddress).changeElectionCommHead(ninthAddress.address)).to.be.revertedWith("Requires Greater than 80% consent of the election committee to approve!") 
         console.log('\t',"Passed ....");
     });
     it("Should revert when contract is paused",async function(){
         const [owner,secondAddress,thirdAddress,fourthAddress,fifthAddress,sixthAddress,seventhAddress,eightAddress] = await ethers.getSigners();
         console.log('\t',"Attempting to Change election committee head role when contract is paused....");
         const paused = await votingContract.connect(owner).setPaused(true);
-        await expect(votingContract.connect(eightAddress).changeElectionCommHead(seventhAddress.address)).to.be.revertedWith("Contract is currently paused");
+        await expect(votingContract.connect(secondAddress).changeElectionCommHead(seventhAddress.address)).to.be.revertedWith("Contract is currently paused");
         const unpaused = await votingContract.connect(owner).setPaused(false);
         console.log('\t',"Passed ....");
     
@@ -799,7 +800,7 @@ describe("Change election committee head role... and concensus voting",function(
     it("Should revert if voter votes to remove committee head is not an member of the election committee",async function(){
         const [owner,secondAddress,thirdAddress,fourthAddress,fifthAddress,sixthAddress,seventhAddress,eightAddress] = await ethers.getSigners();
         console.log('\t',"Attempting to vote for removing committee head as a non member of the election committee....");
-        await expect(votingContract.connect(secondAddress).changeElectionCommHead(seventhAddress.address)).to.be.revertedWith("Only member of the election committee have access");
+        await expect(votingContract.connect(eightAddress).changeElectionCommHead(seventhAddress.address)).to.be.revertedWith("Only the election committee have access");
         console.log('\t',"Passed ....");
     
     });
@@ -807,18 +808,28 @@ describe("Change election committee head role... and concensus voting",function(
         const [owner,secondAddress,thirdAddress,fourthAddress,fifthAddress,sixthAddress,seventhAddress,eightAddress,ninthAddress,tenthAddress] = await ethers.getSigners();
         console.log('\t',"Attempting to give consent twice....");
         //consent by member of the election committee
-        consent1 = await votingContract.connect(eightAddress).voteToRemoveCH();
-        await expect(votingContract.connect(eightAddress).voteToRemoveCH()).to.be.revertedWith("You have already consented..");
+        consent1 = await votingContract.connect(secondAddress).votesToRemoveCH();
+        await expect(votingContract.connect(secondAddress).votesToRemoveCH()).to.be.revertedWith("You have already consented..");
         console.log('\t',"Passed ....");
-        consent2 = await votingContract.connect(seventhAddress).voteToRemoveCH();
-        consent3 = await votingContract.connect(ninthAddress).voteToRemoveCH();
-        consent4 = await votingContract.connect(tenthAddress).voteToRemoveCH();
+
+        consent2 = await votingContract.connect(seventhAddress).votesToRemoveCH();
+        consent3 = await votingContract.connect(ninthAddress).votesToRemoveCH();
+        consent4 = await votingContract.connect(tenthAddress).votesToRemoveCH();
+        consent5 = await votingContract.connect(thirdAddress).votesToRemoveCH();
+        addVoter4 = await votingContract.connect(owner).uploadListOfVoters("electionCommittee",3,[eightAddress.address])
+        consent6 = await votingContract.connect(eightAddress).votesToRemoveCH();
+        consent7 = await votingContract.connect(secondAddress).votesToRemoveCH();
+       
+
+        const count = await votingContract.electionCommitteeCount()
+        console.log(count,"count")
+        
        
     });
     it("Should be able to Change election committee head role if caller is a member of the election committee and a concensus have been reached...",async function(){
         const [owner,secondAddress,thirdAddress,fourthAddress,fifthAddress,sixthAddress,seventhAddress,eightAddress] = await ethers.getSigners();
         console.log('\t',"Attempting to Change election committee head role as a election committee head....");
-        changeElectionCommHead =await votingContract.connect(eightAddress).changeElectionCommHead(eightAddress.address);
+        changeElectionCommHead =await votingContract.connect(secondAddress).changeElectionCommHead(thirdAddress.address);
         const checkOutput = await changeElectionCommHead.wait();
         expect(checkOutput.status).to.equal(1);
         newElectionCommHead = await votingContract.connect(owner).electionCommHead();
